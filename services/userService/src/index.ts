@@ -1,6 +1,13 @@
 import express,{Request,Response} from "express"
+import connectDB from "./config/config"
+
 
 const app  = express()
+
+app.use(express.json())
+
+connectDB()
+
 app.get('/',(req:Request,res:Response)=>{
     res.send('Hello....')
 })
