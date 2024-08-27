@@ -2,16 +2,17 @@ import { Request,Response } from "express"
 import Order from "../model/orderModel"
 
 const placeOrder = async(req:Request,res:Response)=>{
-    const userId = req.params._id 
-    console.log(userId,'userId in place order ')
-    const {products,totalPrice,status,createdAt}= req.body 
+   console.log('***     its   here in place order    ***');
+   
+    
     try {
-        const newOrder = Order.create({
+        const {userId,products,totalPrice,status}= req.body 
+    console.log(userId,'userId in place order ')
+        const newOrder = await Order.create({
             userId,
             products,
             totalPrice,
-            status,
-            createdAt
+            status
         })
         return res.status(200).json({order:newOrder})
     } catch (error) {

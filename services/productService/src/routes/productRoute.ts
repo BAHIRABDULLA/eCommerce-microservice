@@ -2,6 +2,8 @@ import express from 'express'
 
 const router = express.Router()
 
+router.use(express.json())
+
 import productController from '../controller/productController'
 const {productAdd,productEdit,getProducts,productDelete}=productController
 

@@ -2,7 +2,7 @@ import mongoose, { Schema ,Document} from 'mongoose'
 
 
 interface IProduct{
-    name:string;
+    productId:mongoose.Schema.Types.ObjectId;
     quantity:number;
     price:number;
 }
