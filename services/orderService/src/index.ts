@@ -1,7 +1,9 @@
 import express,{ Request,Response } from "express";
+import connectDb from "./config/config";
 
 const app = express()
 
+connectDb()
 app.get('/',(req:Request,res:Response)=>{
     res.send('its worked')
 })
