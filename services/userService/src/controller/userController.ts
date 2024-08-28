@@ -2,6 +2,10 @@ import bcryptjs from 'bcryptjs'
 import { Request, Response } from 'express';
 import User from '../model/userModel';
 import { generateToken } from '../utils/jwt';
+import { sendUserToQueue } from '../events/rabbitmq/producers/userProducer';
+
+
+
 
 const userSignup = async (req: Request, res: Response) => {
     console.log('its here  in userSign up')
@@ -23,12 +27,13 @@ const userSignup = async (req: Request, res: Response) => {
         console.log(newUser,'new User in sign up page')
         const token = generateToken(newUser._id.toString())
         console.log(token,'token')
-        res.status(200).json({token})
+        
+        await  sendUserToQueue(newUser)
+        return res.status(200).json({token})
     } catch (error) {
+        console.error('Error founded ',error);
         res.status(500).json({message:'server error',error})
     }
-
-
 }
 const userSignin = async (req: Request, res: Response) => {
     const { email, password }: { email: string; password: string } = req.body
