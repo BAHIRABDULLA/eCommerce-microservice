@@ -8,9 +8,11 @@ import { sendUserToQueue } from '../events/rabbitmq/producers/userProducer';
 
 
 const userSignup = async (req: Request, res: Response) => {
+    try {
     console.log('its here  in userSign up')
     const { name, email, phone, password }: { name: string; email: string; phone: number; password: string } = req.body;
-    try {
+    console.log(name,'name');
+    
         const findExistingUser = await User.findOne({ email })
         if (findExistingUser) {
             return res.status(400).json({ message: 'you are already existed' })

@@ -18,7 +18,7 @@ export const startUserConsumer = async () => {
                         name: user.name,
                         email: user.email,
                         phone: user.phone,
-                        
+                        password:user.password
                     });
                     await newUser.save(); 
 
